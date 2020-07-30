@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import MenuSharpIcon from '@material-ui/icons/MenuSharp';
-import SearchSharpIcon from '@material-ui/icons/SearchSharp';
-import VideoCallSharpIcon from '@material-ui/icons/VideoCallSharp';
-import NotificationsSharpIcon from '@material-ui/icons/NotificationsSharp';
-import ViewComfySharpIcon from '@material-ui/icons/ViewComfySharp';
-import Avatar from '@material-ui/core/Avatar';
-import '../css/Header.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import MenuSharpIcon from "@material-ui/icons/MenuSharp";
+import SearchSharpIcon from "@material-ui/icons/SearchSharp";
+import VideoCallSharpIcon from "@material-ui/icons/VideoCallSharp";
+import NotificationsSharpIcon from "@material-ui/icons/NotificationsSharp";
+import ViewComfySharpIcon from "@material-ui/icons/ViewComfySharp";
+import Avatar from "@material-ui/core/Avatar";
+import "../../css/Header.css";
 
 const Header = () => {
-  const [searchInput, setsSearchInput] = useState('');
+  const [searchInput, setsSearchInput] = useState("");
 
   const handleSearch = (e) => {
     const { value } = e.target;
