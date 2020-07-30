@@ -1,5 +1,7 @@
 ## A React Clone of YouTube
 
+You must type yarn in cli to install required dependencies!
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
+import React from "react";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
 
-import '../css/VideoCard.css';
+import "../../css/VideoCard.css";
 
 const VideoCard = ({
   image,
