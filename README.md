@@ -4,6 +4,8 @@
 
 Demo can be seen @https://cl-3ef5d.web.app/
 
+You can search in the search bar, it does not hit any DB ,just simulates a view of potential results.
+
 You must type yarn in cli to install required dependencies!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
