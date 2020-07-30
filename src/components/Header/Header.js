@@ -20,11 +20,13 @@ const Header = () => {
     <div className="header">
       <div className="header__left">
         <MenuSharpIcon />
-        <img
-          className="header__logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Logo_of_YouTube_%282005-2011%29.svg/800px-Logo_of_YouTube_%282005-2011%29.svg.png"
-          alt="logo"
-        />
+        <Link to="/">
+          <img
+            className="header__logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Logo_of_YouTube_%282005-2011%29.svg/800px-Logo_of_YouTube_%282005-2011%29.svg.png"
+            alt="logo"
+          />
+        </Link>
       </div>
 
       <div className="header__input">
