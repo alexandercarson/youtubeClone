@@ -2,13 +2,12 @@ name: React App CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-    
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,28 +16,28 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn --frozen-lockfile
-    - run: yarn build
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn --frozen-lockfile
+      - run: yarn build
 
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
 
-    - name: Deploy to EC2
-      uses: easingthemes/ssh-deploy@v2.2.11
-      env:
-        SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-        REMOTE_HOST: ${ { secrets.HOST_DNS }}
-        REMOTE_USER: ${ { secrets.USERNAME }}
-        SOURCE: build/.
-        TARGET: ${ { secrets.TARGET_DIR }}
-        EXCLUDE: /node_modules/
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@v2.2.11
+        env:
+          SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${ { secrets.HOST_DNS }}
+          REMOTE_USER: ${ { secrets.USERNAME }}
+          SOURCE: build/.
+          TARGET: ${ { secrets.TARGET_DIR }}
+          EXCLUDE: /node_modules/
