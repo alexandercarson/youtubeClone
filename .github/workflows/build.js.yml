@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy in EC2
-        run: sh ./github/scripts/deploy_to_aws.sh
+        run: sh ./.github/scripts/deploy_to_aws.sh
         env:
           # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
           HOST_DNS: ${{ secrets.HOST_DNS }}
