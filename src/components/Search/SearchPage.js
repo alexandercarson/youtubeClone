@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import ChannelRow from "../ChannelRow";
 import VideoRow from "../VideoRow";
 import TuneSharpIcon from "@material-ui/icons/TuneSharp";
