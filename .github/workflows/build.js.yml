@@ -51,11 +51,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Set PVK
+        run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
       - name: Run sshpass
         uses: matheusvanzan/sshpass-action@v2
         with:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SERVER_KEY }}
+          key: private_key
           run: |
             pwd
