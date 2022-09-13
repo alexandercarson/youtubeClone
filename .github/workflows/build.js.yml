@@ -38,6 +38,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: /var/www/html/
+          # TARGET: /var/www/html/
           SOURCE: build/
           EXCLUDE: "/build/, /node_modules/"
