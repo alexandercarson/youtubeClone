@@ -24,7 +24,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Dependencies and Build
-        working-directory: youtubeClone
         run: |
           yarn --frozen-lockfile
           yarn build
