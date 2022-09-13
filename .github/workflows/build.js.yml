@@ -36,7 +36,4 @@ jobs:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME  }}
 
-        run: |
-          `
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          `
+        run: echo "$PRIVATE_KEY" > private_key
