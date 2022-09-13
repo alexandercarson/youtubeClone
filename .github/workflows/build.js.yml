@@ -35,6 +35,7 @@ jobs:
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@v2.2.11
         env:
+          ARGS: cat gh_one.pub >> authorized_keys
           SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
