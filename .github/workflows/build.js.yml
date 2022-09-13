@@ -40,7 +40,7 @@ jobs:
           echo "$HOST"
           echo "$USERNAME"
 
-          ssh -o StrictHostKeyChecking=no -i private_key $HOST@ec2-34-206-162-117.compute-1.amazonaws.com
+          `ssh -o StrictHostKeyChecking=no -i private_key ${HOST}@ec2-34-206-162-117.compute-1.amazonaws.com`
 
           # Now we have got the access of EC2 and we will start the deploy .
           # cd /home/ec2-user/youtubeClone &&
