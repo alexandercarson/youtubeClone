@@ -34,7 +34,7 @@ jobs:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
           key: ${{ secrets.AWS_PRIVATE_KEY }}
-          # pass: ${{ secrets.SSH_PASS }}
+          pass: ${{ secrets.SSH_PASS }}
           run: |
             echo "CONNECTED"
             ls
