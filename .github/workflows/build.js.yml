@@ -25,26 +25,19 @@ jobs:
   #     - run: yarn build
 
   deploy:
-    # needs: build
+    # needs: [build]
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy in EC2
-        env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME  }}
+      - name: Checkout source code
+        uses: actions/checkout@v2
 
-        run: |
-          echo "$PRIVATE_KEY" > private_key_file && chmod 600 private_key_file
-          ssh -o StrictHostKeyChecking=no -i private_key_file $USERNAME@$HOST
-          '
-          # #   #Now we have got the access of EC2 and we will start the deploy .
-          # #   cd /home/ec2-user/youtubeClone &&
-          # #   git checkout master &&
-          # #   git fetch --all &&
-          # #   git reset --hard origin/master &&
-          # #   git pull origin master &&
-          # #   cp build/. var/www/html
-          # '
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@v2.2.11
+        env:
+          SSH_PRIVATE_KEY: ${ { secrets.AWS_PRIVATE_KEY }}
+          REMOTE_HOST: ${ { secrets.HOST }}
+          REMOTE_USER: ${ { secrets.USERNAME }}
+          TARGET: /var/www/html
+          SOURCE: /build/
+          EXCLUDE: /node_modules/
