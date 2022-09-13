@@ -7,46 +7,22 @@ on:
     branches: ["master"]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [16.x]
-  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Use Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn build
-
-  # deploy:
-  #   # needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Deploy in EC2s
-  #       env:
-  #         PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-  #         # HOST: ${{ secrets.HOST }}
-  #         # USERNAME: ${{ secrets.USERNAME }}
-  #         SSHPASS: ${{ secrets.SSH_PASS }}
-  #       run: |
-  #         # echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-
-  #         sshpass -e SSHPASS ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
-
-  #         # Now we have got the access of EC2 and we will start the deploy .
-  #         # cd /home/ec2-user/youtubeClone &&
-  #         # git checkout master &&
-  #         # git fetch --all &&
-  #         # git reset --hard origin/master &&
-  #         # git pull origin master
-  #         # # docker-compose -f docker-compose.prod.yml up -d --build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn --frozen-lockfile
+      - run: yarn build
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,5 +36,7 @@ jobs:
         run: |
           echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
           sudo apt-get update && sudo apt-get install -y sshpass
-          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/var/www/html
+
+          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
+          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com cp /home/ec2-user/youtubeClone/build/. /var/www/html/
           sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com pwd
