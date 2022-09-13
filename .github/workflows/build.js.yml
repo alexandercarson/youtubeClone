@@ -52,7 +52,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run sshpass
-        uses: matheusvanzan/sshpass-action@v2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           HOST: ${{ secrets.HOST }}
