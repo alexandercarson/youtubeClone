@@ -34,11 +34,11 @@ jobs:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           # HOST: ${{ secrets.HOST }}
           # USERNAME: ${{ secrets.USERNAME }}
-          SSH_PASS: ${{ secrets.SSH_PASS }}
+          SSHPASS: ${{ secrets.SSH_PASS }}
         run: |
           # echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
 
-          sshpass -e SSH_PASS ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
+          sshpass -e SSHPASS ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
 
 
           # Now we have got the access of EC2 and we will start the deploy .
