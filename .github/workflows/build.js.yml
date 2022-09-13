@@ -7,22 +7,22 @@ on:
     branches: ["master"]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
+  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn --frozen-lockfile
-      - run: yarn build
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - run: yarn --frozen-lockfile
+  #     - run: yarn build
 
   deploy:
     needs: build
@@ -37,9 +37,5 @@ jobs:
           USERNAME: ${{ secrets.USERNAME  }}
 
         run: |
-          # Now we have got the access of EC2 and we will start the deploy .
-          git checkout master &&
-          git fetch --all &&
-          git reset --hard origin/master &&
-          git pull origin master &&
-          sudo cp build/. -r /var/www/html
+          echo ${{ github.workspace }}
+          echo $GITHUB_WORKSPACE
