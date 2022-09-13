@@ -40,4 +40,4 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: /var/www/html
           SOURCE: build/
-          EXCLUDE: "/build/, /node_modules/"
+          EXCLUDE: "/build, /node_modules/"
