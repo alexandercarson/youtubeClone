@@ -22,6 +22,9 @@ jobs:
 
       - name: Checks-out repository under $GITHUB_WORKSPACE, so job can access it
         uses: actions/checkout@v3
+
+      - name: Install Dependencies and Build
+        working-directory: youtubeClone
         run: |
           yarn install --frozen-lockfile
           yarn build
