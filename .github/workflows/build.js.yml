@@ -37,8 +37,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME  }}
 
         run: |
-          echo "$PRIVATE_KEY" > PRIVATE_KEY && chmod 600 PRIVATE_KEY
-          ssh -o StrictHostKeyChecking=no -i PRIVATE_KEY $USERNAME@$HOST
+          chmod 600 /home/ec2-user/.ssh/github_action
+          ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/github_action $USERNAME@$HOST
 
           # #   #Now we have got the access of EC2 and we will start the deploy .
           # #   cd /home/ec2-user/youtubeClone &&
