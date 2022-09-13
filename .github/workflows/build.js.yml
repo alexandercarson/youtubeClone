@@ -37,4 +37,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME  }}
 
         run: |
-          echo ${{ secrets.HOST_DNS }}
+          echo ${{ secrets.HOST_DNS }} > ~/test
