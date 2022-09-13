@@ -55,9 +55,11 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          SSHPASS: ${{ secrets.SSH_PASS }}
+          # USERNAME: ${{ secrets.USERNAME }}
+          # SSHPASS: ${{ secrets.SSH_PASS }}
         run: |
           sudo apt-get update && sudo apt-get install -y sshpass
-          sshpass -e SSHPASS ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
+          SSHPASS='Alexander8923!' sshpass -e ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
           pwd
+
+# sshpass -e SSHPASS ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
