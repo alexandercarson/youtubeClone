@@ -32,6 +32,7 @@ jobs:
           SSH_PASSWORD: ${{ secrets.SSH_PASS }}
         run: |
           pwd
+          ls
           # echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
           # sudo apt-get update && sudo apt-get install -y sshpass
 
