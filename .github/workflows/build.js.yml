@@ -24,6 +24,20 @@ jobs:
   #     - run: yarn --frozen-lockfile
   #     - run: yarn build
 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          # TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/build/, /node_modules/"
+
   Deploy:
     # needs: build
     runs-on: ubuntu-latest
@@ -41,7 +55,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
 
           # /home/runner/work/youtubeClone/youtubeClone 
-          ls
+
           # Now we have got the access of EC2 and we will start the deploy .
           # cd /home/ec2-user/youtubeClone &&
           # git checkout master &&
