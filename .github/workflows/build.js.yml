@@ -35,4 +35,4 @@ jobs:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME  }}
-        run: echo "$PRIVATE_KEY" > private_key
+        run: echo "${USERNAME}" > private_key
