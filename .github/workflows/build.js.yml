@@ -24,24 +24,26 @@ jobs:
   #     - run: yarn --frozen-lockfile
   #     - run: yarn build
 
-  deploy:
-    # needs: [build]
+  Deploy:
+    # needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code t
-        uses: actions/checkout@v2
-
-      # - name: Test This
-      #   run: |
-      #     cat ~/.ssh/ghid.pub >> authorized_keys
-
-      - name: Deploy to EC2
-        uses: easingthemes/ssh-deploy@main
+      - uses: actions/checkout@v2
+      - name: Deploy in EC2
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          # TARGET: /var/www/html/
-          SOURCE: build/
-          EXCLUDE: "/build/, /node_modules/"
+          AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+          HOST: ${{ secrets.HOST  }}
+          USERNAME: ${{ secrets.USERNAME  }}
+
+        run: |
+          echo "$AWS_PRIVATE_KEY" > aws_private_key && chmod 600 aws_private_key
+          ssh -o StrictHostKeyChecking=no -i aws_private_key ${USERNAME}@${HOST} '
+
+            #Now we have got the access of EC2 and we will start the deploy .
+            cd /home/ec2-user/youtubeClone &&
+            git checkout master &&
+            git fetch --all &&
+            git reset --hard origin/master &&
+            git pull origin master
+            # docker-compose -f docker-compose.prod.yml up -d --build
