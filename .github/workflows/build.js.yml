@@ -25,7 +25,7 @@ jobs:
   #     - run: yarn build
 
   deploy:
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -36,4 +36,10 @@ jobs:
           HOST_DNS: ${{ secrets.HOST_DNS  }}
           USERNAME: ${{ secrets.USERNAME  }}
 
-        run: ls
+        run: |
+          # Now we have got the access of EC2 and we will start the deploy .
+          git checkout master &&
+          git fetch --all &&
+          git reset --hard origin/master &&
+          git pull origin master &&
+          sudo cp build/. -r /var/www/html
