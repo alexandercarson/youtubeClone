@@ -40,10 +40,10 @@ jobs:
           echo "$AWS_PRIVATE_KEY" > aws_private_key && chmod 600 aws_private_key
           ssh -o StrictHostKeyChecking=no -i aws_private_key ${USERNAME}@${HOST} '
 
-            #Now we have got the access of EC2 and we will start the deploy .
-            cd /home/ec2-user/youtubeClone &&
-            git checkout master &&
-            git fetch --all &&
-            git reset --hard origin/master &&
-            git pull origin master
+            # Now we have got the access of EC2 and we will start the deploy .
+            # cd /home/ec2-user/youtubeClone &&
+            # git checkout master &&
+            # git fetch --all &&
+            # git reset --hard origin/master &&
+            # git pull origin master &&
             # docker-compose -f docker-compose.prod.yml up -d --build
