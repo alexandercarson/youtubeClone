@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Run sshpass
+      - name: Run sshpassx
         env:
           # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           # HOST: ${{ secrets.HOST }}
