@@ -32,10 +32,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Deploy in EC2
         env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOST_DNS: ${{ secrets.HOST_DNS  }}
+          HOST: ${{ secrets.HOST  }}
           USERNAME: ${{ secrets.USERNAME  }}
 
         run: |
-          # echo "${{ secrets.USERNAME }}" > ~/.ssh/username
-          echo "Hello World!"
+          echo "${{ secrets.USERNAME }}" > ~/.ssh/known_hosts
+          # echo "Hello World!"
