@@ -37,5 +37,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME  }}
 
         run: |
-          echo ${{ github.workspace }}
-          echo $GITHUB_WORKSPACE
+          echo ${{ secrets.HOST_DNS }}
