@@ -32,20 +32,18 @@ jobs:
       - name: Deploy in EC2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
+          # HOST: ${{ secrets.HOST }}
+          # USERNAME: ${{ secrets.USERNAME }}
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          echo "$HOST"
-          echo "$USERNAME"
 
-          ssh -o StrictHostKeyChecking=no -i private_key "$HOST"@ec2-34-206-162-117.compute-1.amazonaws.com
+          ssh -o StrictHostKeyChecking=no -i private_key ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
 
           # Now we have got the access of EC2 and we will start the deploy .
-          # cd /home/ec2-user/youtubeClone &&
-          # git checkout master &&
-          # git fetch --all &&
-          # git reset --hard origin/master &&
-          # git pull origin master &&
+          cd /home/ec2-user/youtubeClone &&
+          git checkout master &&
+          git fetch --all &&
+          git reset --hard origin/master &&
+          git pull origin master &&
           # docker-compose -f docker-compose.prod.yml up -d --build
