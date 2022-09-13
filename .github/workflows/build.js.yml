@@ -58,6 +58,6 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           SSHPASS: ${{ secrets.SSH_PASS }}
         run: |
-          apt-get update && apt-get install -y sshpass
+          sudo apt-get update && sudo apt-get install -y sshpass
           sshpass -e SSHPASS ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com
           pwd
