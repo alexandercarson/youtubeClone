@@ -8,33 +8,44 @@ on:
 
 jobs:
   build:
-    name: Build App
+    name: Build React App
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
-      - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn --frozen-lockfile
-      - run: yarn build
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Run sshpassx
+      - name: Checks-out repository under $GITHUB_WORKSPACE, so job can access it
+        uses: actions/checkout@v3
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Deploy to server - sshpass
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASS }}
         run: |
-          ls
-          # echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
-          # sudo apt-get update && sudo apt-get install -y sshpass
+          sudo apt-get update && sudo apt-get install -y sshpass
+          echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
 
-          # sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user
-          # sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com cp /home/ec2-user/youtubeClone/build/. /var/www/html/
-          # sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com pwd
+          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user
+          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com cp /home/ec2-user/youtubeClone/build/. /var/www/html/
+          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com pwd
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Run sshpassx
+  #       env:
+  #         SSH_PASSWORD: ${{ secrets.SSH_PASS }}
+  #       run: |
+  #         sudo apt-get update && sudo apt-get install -y sshpass
+  #         echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
+  #         sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user
+  #         sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com cp /home/ec2-user/youtubeClone/build/. /var/www/html/
+  #         sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com pwd
