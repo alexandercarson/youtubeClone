@@ -34,5 +34,5 @@ jobs:
         run: sh ./.github/scripts/deploy_to_aws.sh
         env:
           # PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOST_DNS: ${{ secrets.HOST_DNS }}
+          HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
