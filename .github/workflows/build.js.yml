@@ -37,8 +37,8 @@ jobs:
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          echo "$HOST" > host
-          echo "$USERNAME" > username
+          echo "$HOST" > host && chmod 600 host
+          echo "$USERNAME" > username && chmod 600 username
 
           ssh -o StrictHostKeyChecking=no -i private_key username@host
 
