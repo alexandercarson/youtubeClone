@@ -31,8 +31,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO"
-          SOURCE: "dist/"
+          SOURCE: "build/"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           # TARGET: ${{ secrets.REMOTE_TARGET }}
