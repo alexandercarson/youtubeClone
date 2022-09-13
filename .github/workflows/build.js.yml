@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > PRIVATE_KEY && chmod 600 PRIVATE_KEY
           ssh -o StrictHostKeyChecking=no -i PRIVATE_KEY $USERNAME@$HOST
-          '
+
           # #   #Now we have got the access of EC2 and we will start the deploy .
           # #   cd /home/ec2-user/youtubeClone &&
           # #   git checkout master &&
@@ -47,4 +47,3 @@ jobs:
           # #   git reset --hard origin/master &&
           # #   git pull origin master &&
           # #   cp build/. var/www/html
-          # '
