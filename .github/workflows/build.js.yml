@@ -31,10 +31,11 @@ jobs:
       - name: Run sshpass commands
         uses: matheusvanzan/sshpass-action@v2
         with:
-          HOST: ${{ secrets.SERVER_HOST }}
-          USERNAME: ${{ secrets.SERVER_USER }}
-          SSH_PASS: ${{ secrets.SERVER_PASS }}
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USERNAME }}
+          pass: ${{ secrets.SSH_PASS }}
           run: |
+            echo "CONNECTED!"
             ls
       # - uses: actions/checkout@v2
       # - name: Deploy in EC2
