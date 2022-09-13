@@ -51,11 +51,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Run sshpass commands
+      - name: Run sshpass
         uses: matheusvanzan/sshpass-action@v2
         with:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
-          pass: ${{ secrets.SSH_PASS }}
+          key: ${{ secrets.SERVER_KEY }}
           run: |
             pwd
