@@ -36,8 +36,8 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.2.11
         env:
           SSH_PRIVATE_KEY: ${ { secrets.AWS_PRIVATE_KEY }}
-          REMOTE_HOST: ${ { secrets.HOST }}
-          REMOTE_USER: ${ { secrets.USERNAME }}
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: /var/www/html
-          SOURCE: build
-          EXCLUDE: /node_modules/
+          SOURCE: build/
+          EXCLUDE: "/build/, /node_modules/"
