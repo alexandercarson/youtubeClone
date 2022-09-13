@@ -37,4 +37,5 @@ jobs:
           USERNAME: ${{ secrets.USERNAME  }}
 
         run: |
-          echo "${{ secrets.USERNAME }}" > ~/.ssh/username
+          # echo "${{ secrets.USERNAME }}" > ~/.ssh/username
+          echo "Hello World!"
