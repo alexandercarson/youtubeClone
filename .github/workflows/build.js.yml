@@ -37,7 +37,7 @@ jobs:
           pass: ${{ secrets.SSH_PASS }}
           run: |
             echo "CONNECTED"
-            ls
+            pwd
       # - uses: actions/checkout@v2
       # - name: Deploy in EC2
       #   env:
