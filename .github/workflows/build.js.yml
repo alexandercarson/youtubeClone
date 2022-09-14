@@ -37,7 +37,7 @@ jobs:
           sudo apt-get install -y sshpass 
           sudo apt-get install rsync
 
-          sshpass -f pass_file rsync -r -e 'ssh -o "StrictHostKeyChecking=no"' $GITHUB_WORKSPACE ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
+          rsync -ah -e 'sshpass -f pass_file ssh -o StrictHostKeyChecking=no' $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
 
           # sshpass -f pass_file rsync -r $GITHUB_WORKSPACE -e ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:~/something/ 
           # sshpass -f pass_file rsync -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/youtubeClone
@@ -64,3 +64,4 @@ jobs:
   #         sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user
   #         sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com cp /home/ec2-user/youtubeClone/build/. /var/www/html/
   #         sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com pwd
+  # sshpass -f pass_file rsync -a ssh -o "StrictHostKeyChecking=no"' $GITHUB_WORKSPACE ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
