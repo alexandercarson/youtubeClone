@@ -37,7 +37,9 @@ jobs:
       #   shell: bash
       - name: test
         run: |
-          pwd
+          yarn
+          yarn build
+          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com mv -f ./youtubeClone/build/. /var/www/html
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: build
