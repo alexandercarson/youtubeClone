@@ -32,7 +32,7 @@ jobs:
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASS }}
         run: |
-          ./.github/scripts/deploy_to_aws.sh
+          sudo ./.github/scripts/deploy_to_aws.sh
           # sudo apt-get update && sudo apt-get install -y sshpass
           # echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
 
