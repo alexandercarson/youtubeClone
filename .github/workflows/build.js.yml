@@ -24,7 +24,7 @@ jobs:
       - name: Checks-out repository under $GITHUB_WORKSPACE, so job can access it
         uses: actions/checkout@v3
 
-      - name: Install Dependencies and Build
+      - name: Install Dependencies and Builds
         run: |
           yarn --frozen-lockfile
           yarn build
