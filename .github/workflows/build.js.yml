@@ -37,7 +37,8 @@ jobs:
           sudo apt-get install -y sshpass
           echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
 
-          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com echo "OKAY !"
+
+          sshpass -p 'Alexander8923!' ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com whoami
           # sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE/build/ ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/var/www/html
       # - name: Deploy to Server 1
       #   uses: easingthemes/ssh-deploy@main
