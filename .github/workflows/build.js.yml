@@ -33,6 +33,7 @@ jobs:
           SSH_PASSWORD: ${{ secrets.SSH_PASS }}
         run: |
           chmod +x ./scripts/deploy_to_aws.sh && ./scripts/deploy_to_aws.sh
+          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user
         shell:
           bash
           # sudo apt-get update && sudo apt-get install -y sshpass
