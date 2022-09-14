@@ -38,8 +38,9 @@ jobs:
       - name: test
         run: |
           yarn
-          cp package-lock.json /home/ec2-user/youtubeClone
+          cp yarn.lock /home/ec2-user/youtubeClone
           cd /home/ec2-user/youtubeClone
+          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com mv -f /home/ec2-user/youtubeClone /var/www/html
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: build
