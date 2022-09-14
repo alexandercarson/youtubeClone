@@ -1,4 +1,4 @@
-echo 'Starting to Deploy...'
+echo 'Starting to Deploy....'
     sudo apt-get update && sudo apt-get install -y sshpass
     echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
 
