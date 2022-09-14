@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          # cache: "yarn"
 
       - name: Checks-out repository under $GITHUB_WORKSPACE, so job can access it
         uses: actions/checkout@v3
