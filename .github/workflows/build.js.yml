@@ -29,19 +29,22 @@ jobs:
           yarn --frozen-lockfile
           yarn build
 
-      # - name: Deploy to server - sshpass
-      #   env:
-      #     SSH_PASSWORD: ${{ secrets.SSH_PASS }}
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y sshpass
-      #     sudo apt-get install rsync
+      - name: Deploy to server - sshpass
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASS }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          sudo apt-get install rsync
+          sshpass -f pass_file rsync /home/runner/work/youtubeClone/youtubeClone/ ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/ --rsh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com"
 
-      #     sshpass -f pass_file rsync -ahv ssh -o StrictHostKeyChecking=no $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
 
-      #     # sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com rm -rf /home/ec2-user/youtubeClone
-      #     # chmod +x ./scripts/deploy_to_aws.sh && ./scripts/deploy_to_aws.sh
-      #   shell: bash
+          # sshpass -f pass_file rsync -ahv ssh -o StrictHostKeyChecking=no $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
+
+          # sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com rm -rf /home/ec2-user/youtubeClone
+          # chmod +x ./scripts/deploy_to_aws.sh && ./scripts/deploy_to_aws.sh
+        shell: bash
+
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
