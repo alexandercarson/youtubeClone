@@ -15,19 +15,19 @@ jobs:
         node-version: [16.x]
 
     steps:
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     # cache: "yarn"
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          # cache: "yarn"
 
-      # - name: Checks-out repository under $GITHUB_WORKSPACE, so job can access it
-      #   uses: actions/checkout@v3
+      - name: Checks-out repository under $GITHUB_WORKSPACE, so job can access it
+        uses: actions/checkout@v3
 
-      # - name: Install Dependencies and Buildss
-      #   run: |
-      #     yarn --frozen-lockfile
-      #     yarn build
+      - name: Install Dependencies and Buildss
+        run: |
+          yarn --frozen-lockfile
+          yarn build
 
       - name: Deploy to server - sshpasss
         env:
@@ -37,13 +37,6 @@ jobs:
           sudo apt-get install -y sshpass
           echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
 
-
+          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user
           sshpass -f pass_file ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com rm -rf /var/www/html/build
-          # sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE/build/ ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/var/www/html
-      # - name: Deploy to Server 1
-      #   uses: easingthemes/ssh-deploy@main
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-      #     REMOTE_HOST: ${{ secrets.HOST }}
-      #     REMOTE_USER: ${{ secrets.USERNAME }}
-      #     TARGET: /home/ec2-user/
+          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE/build/ ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/var/www/html
