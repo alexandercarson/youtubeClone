@@ -37,6 +37,8 @@ jobs:
       #   shell: bash
       - name: test
         run: |
+          sudo apt-get update && sudo apt-get install -y sshpass
+          echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
           yarn
           yarn build
           sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com mv -f ./youtubeClone/build/. /var/www/html
