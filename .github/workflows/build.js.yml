@@ -35,11 +35,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y sshpass
-          sudo apt-get install rsync
+          echo "$SSH_PASSWORD" > pass_file && chmod 0400 pass_file
 
-          # sshpass -f pass_file rsync -a -e "ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com" $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
-          rsync --rsh="sshpass -f pass_file ssh -o StrictHostKeyChecking=no" $GITHUB_WORKSPACE ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/home/ec2-user/
-        # sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com rm -rf /home/ec2-user/youtubeClone
+          sshpass -f pass_file scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE/build/. ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com:/var/www/html
         shell: bash
 
       - name: Deploy to Server 1
