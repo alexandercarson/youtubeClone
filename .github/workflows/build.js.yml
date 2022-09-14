@@ -32,7 +32,7 @@ jobs:
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASS }}
         run: |
-          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com rm -rf /home/ec2-user/youtubeClone/
+          sshpass -f pass_file ssh ec2-user@ec2-34-206-162-117.compute-1.amazonaws.com rm -rf $(/home/ec2-user/youtubeClone)
           # chmod +x ./scripts/deploy_to_aws.sh && ./scripts/deploy_to_aws.sh
         shell:
           bash
